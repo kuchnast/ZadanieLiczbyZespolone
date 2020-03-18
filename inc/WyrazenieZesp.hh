@@ -21,14 +21,19 @@ struct WyrazenieZesp {
 };
 
 /*!
- * Wyswietla wyrazenie zespolone
- */
-void Wyswietl(WyrazenieZesp  WyrZ);
-
-/*!
  * Oblicza przesłane wyrazenie zespolone
  */
 LZespolona Oblicz(WyrazenieZesp  WyrZ);
 
+/*!
+ * Wczytuje operator arytmetyczny ze strumienia wejsciowego
+ */
+std::istream & operator >> (std::istream & strm, Operator & Op);
+
+std::ostream & operator << (std::ostream & strm, const Operator & Op);
+
+std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & WyrZ);
+
+std::istream & operator >>(std::istream & strm, WyrazenieZesp & WyrZ);
 
 #endif

@@ -31,24 +31,24 @@ LZespolona  operator - (LZespolona  L1,  LZespolona  L2);
 LZespolona  operator * (LZespolona  L1,  LZespolona  L2);
 
 /*!
+ * Dzielenie liczby zespolonej przez rzeczywista
+ */
+LZespolona  operator / (LZespolona  L1,  double R);
+
+/*!
  * Dzielenie zespolone
  */
 LZespolona  operator / (LZespolona  L1,  LZespolona  L2);
 
 /*!
- * Dzielenie liczby zespolonej przez rzeczywista
+ * Porownanie liczb zespolonych
  */
-LZespolona  operator / (LZespolona  L1,  int R);
+bool operator == (LZespolona  L1,  LZespolona  L2);
 
 /*!
  * Porownanie liczb zespolonych
  */
-bool        operator == (LZespolona  L1,  LZespolona  L2);
-
-/*!
- * Porownanie liczb zespolonych
- */
-bool        operator != (LZespolona  L1,  LZespolona  L2);
+bool operator != (LZespolona  L1,  LZespolona  L2);
 
 /*!
  * Modul z liczby zespolonej
@@ -68,11 +68,17 @@ void Wyswietl(LZespolona Skl);
 /*!
  * Tworzenie nowej liczby zespolonej z dwoch czesci rzeczywistych
  */
-LZespolona Utworz(int re, int im);
+LZespolona Utworz(double re, double im);
 
 /*!
- * Wczytuje i sprawdza poprawnosc wpisanego wyrazenia zespolonego
+ * Wczytuje i sprawdza poprawnosc liczby zespolonej
  */
-bool Wczytaj(LZespolona &L);
+std::istream & operator >> (std::istream & strm, LZespolona & L);
+
+/*!
+ * Wyswietla liczbe zespolona
+ */
+std::ostream & operator << (std::ostream & strm, const LZespolona & L);
+
 
 #endif

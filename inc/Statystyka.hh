@@ -2,8 +2,8 @@
 #define STATYSTYKA_HH
 
 struct Punkty{
-    int LDobrychOdp;
-    int LOdp;
+    double LDobrychOdp;
+    double LOdp;
 };
 
 void InicjalizujOdp(Punkty &Pkt);

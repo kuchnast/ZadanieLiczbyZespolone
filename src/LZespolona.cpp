@@ -61,21 +61,6 @@ LZespolona  operator * (LZespolona  L1,  LZespolona  L2)
 }
 
 /*!
- * Realizuje dzielenie dwoch liczb zespolonych.
- * Argumenty:
- *    L1 - pierwsza liczba - dzielna,
- *    L2 - druga liczba - dzielnik.
- * Zwraca:
- *    Iloraz dwoch liczb przekazanych jako parametry.
- */
-LZespolona  operator / (LZespolona  L1,  LZespolona  L2){
-  LZespolona Iloraz;
-
-  Iloraz = (L1 * Sprzezenie(L2)) / pow(Modul(L2), 2);
-  return Iloraz;
-}
-
-/*!
  * Realizuje dzielenie liczby zespolonej przez całkowitą.
  * Argumenty:
  *    L1 - pierwsza liczba - zespolona dzielna,
@@ -89,6 +74,21 @@ LZespolona  operator / (LZespolona  L1,  double R){
   Iloraz.re = L1.re / R;
   Iloraz.im = L1.im / R;
 
+  return Iloraz;
+}
+
+/*!
+ * Realizuje dzielenie dwoch liczb zespolonych.
+ * Argumenty:
+ *    L1 - pierwsza liczba - dzielna,
+ *    L2 - druga liczba - dzielnik.
+ * Zwraca:
+ *    Iloraz dwoch liczb przekazanych jako parametry.
+ */
+LZespolona  operator / (LZespolona  L1,  LZespolona  L2){
+  LZespolona Iloraz;
+
+  Iloraz = (L1 * Sprzezenie(L2)) / pow(Modul(L2), 2);
   return Iloraz;
 }
 
@@ -117,9 +117,9 @@ bool  operator == (LZespolona  L1,  LZespolona  L2){
  */
 bool  operator != (LZespolona  L1,  LZespolona  L2){
   if(L1.re != L2.re && L1.im != L2.im){
-    return false;
+    return true;
   }
-  return true;
+  return false;
 }
 
 /*!
@@ -149,15 +149,6 @@ LZespolona Sprzezenie(LZespolona L1){
 }
 
 /*!
- * Wyswietla liczbe zespolona.
- * Argumenty:
- *    L1 - liczba zespolona,
- */
-void Wyswietl(LZespolona Skl){
-  cout << '(' << Skl.re << showpos << Skl.im << noshowpos << "i)" << endl; 
-}
-
-/*!
  * Tworzy nowa liczbe zespolona.
  * Argumenty:
  *    re - czesc rzeczywista liczby zespolonej
@@ -165,7 +156,7 @@ void Wyswietl(LZespolona Skl){
  * Zwraca:
  *    Liczbe zespolona utworzona z dwoch liczb rzeczywistych przeslanych jako parametry
  */
-LZespolona Utworz(double re, int double){
+LZespolona Utworz(double re, double im){
   LZespolona Nowa;
 
   Nowa.re = re;
@@ -174,15 +165,38 @@ LZespolona Utworz(double re, int double){
 }
 
 /*!
- * Wykonuje operacje matematyczna zawarta w strukturze wyrazenia
+ * Realizuje wczytywanie liczby zespolonej
  * Argumenty:
- *    L - referencja do ktorej zostanie wczytana liczba zespolona
+ *    strm - referencja do strumienia wejściowego.
+ *    Skl - referencja do struktury na liczbę zespoloną.
  * Zwraca:
- *    true jezeli udalo sie wczytac liczbe, w przeciwnym razie false
+ *    referencja do strumienia wejściowego.
  */
-bool Wczytaj(LZespolona &L){
-    char c;
-    if (cin >> c)
+std::istream & operator >>(std::istream & strm, LZespolona & L){
+  char znak;
 
-    return true;
+  strm>>znak;
+  if (znak != '(')
+    strm.setstate(std::ios::failbit); 
+  strm>>L.re>>L.im>>znak;
+  if (znak != 'i')
+    strm.setstate(std::ios::failbit); 
+  strm>>znak;
+  if (znak != ')')
+    strm.setstate(std::ios::failbit); 
+
+  return strm;
+}
+
+/*!
+ * Realizuje wypisanie liczby zespolonej
+ * Argumenty:
+ *    strm - referencja do strumienia wyjściowego.
+ *    L - referencja do struktury na liczbę zespoloną.
+ * Zwraca:
+ *    referencja do strumienia wyjściowego.
+ */
+std::ostream & operator << (std::ostream & strm, const LZespolona & L){
+  strm << '(' << L.re << showpos << L.im << noshowpos << "i)"; 
+  return strm;
 }

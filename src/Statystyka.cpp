@@ -13,7 +13,7 @@ using std::endl;
  */
 void InicjalizujOdp(Punkty &Pkt){
     Pkt.LDobrychOdp = 0;
-    Pkt.LOdp = ;
+    Pkt.LOdp = 0;
 }
 
 void DobraOdp(Punkty &Pkt){
@@ -30,6 +30,6 @@ void WyswietlStatystyki(Punkty Pkt){
 
     cout<<"Ilosc dobrych odpowiedzi: "<<Pkt.LDobrychOdp<<endl;
     cout<<"Ilosc blednych odpowiedzi: "<<Pkt.LOdp - Pkt.LDobrychOdp<<endl;
-    procent = (Pkt.LOdp / Pkt.LDobrychOdp) * 100;
+    procent = Pkt.LDobrychOdp / Pkt.LOdp * 100;
     cout<<"Wynik procentowy poprawnych odpowiedzi: "<<procent<<" %"<<endl;
 }
