@@ -1,7 +1,7 @@
 #ifndef WYRAZENIEZESP_HH
 #define WYRAZENIEZESP_HH
 
-
+#include <iostream>
 
 #include "LZespolona.hh"
 
@@ -23,17 +23,26 @@ struct WyrazenieZesp {
 /*!
  * Oblicza przesłane wyrazenie zespolone
  */
-LZespolona Oblicz(WyrazenieZesp  WyrZ);
+bool Oblicz(WyrazenieZesp  WyrZ, LZespolona & Obl);
 
 /*!
  * Wczytuje operator arytmetyczny ze strumienia wejsciowego
  */
 std::istream & operator >> (std::istream & strm, Operator & Op);
 
+/*!
+ * Wypisuje operator arytmetyczny na strumien wyjsciowy
+ */
 std::ostream & operator << (std::ostream & strm, const Operator & Op);
 
+/*!
+ * Wypisuje wyrazenie arytmetyczny na strumien wyjsciowy
+ */
 std::ostream & operator << (std::ostream & strm, const WyrazenieZesp & WyrZ);
 
+/*!
+ * Wczytuje wyrazenie arytmetyczny ze strumienia wejsciowego
+ */
 std::istream & operator >>(std::istream & strm, WyrazenieZesp & WyrZ);
 
 #endif

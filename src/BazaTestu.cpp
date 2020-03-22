@@ -24,7 +24,7 @@ static WyrazenieZesp  TestTrudny[] =
   { {{-5,4}, Op_Dodaj, {3,-12}},
     {{-2,-3}, Op_Odejmij, {5,-5}},
     {{4,-2}, Op_Mnoz, {-3,5}},
-    {{3,-8}, Op_Dziel, {2,-3}},
+    {{26,13}, Op_Dziel, {4,7}},
   };
 
 /*
@@ -44,8 +44,7 @@ static WyrazenieZesp  TestTrudny[] =
  *      - Parametr IloscPytan zawiera wartosc, ktora nie przekracza ilosci elementow
  *        w tablicy dostepnej poprzez wskTabTestu.
  */
-void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned int IloscPytan )
-{
+void UstawTest( BazaTestu *wskBazaTestu, WyrazenieZesp *wskTabTestu, unsigned int IloscPytan ){
   wskBazaTestu->wskTabTestu = wskTabTestu;
   wskBazaTestu->IloscPytan = IloscPytan;
   wskBazaTestu->IndeksPytania = 0;
@@ -106,9 +105,9 @@ else if(!strcmp(sNazwaTestu,"trudny")){
  *              przypisane nowe wyrazenie zespolone z bazy,
  *       false - w przypadku przeciwnym.
  */
-bool PobierzNastpnePytanie( BazaTestu  *wskBazaTestu, WyrazenieZesp *wskWyrazenie )
-{
-  if (wskBazaTestu->IndeksPytania >= wskBazaTestu->IloscPytan) return false;
+bool PobierzNastpnePytanie( BazaTestu  *wskBazaTestu, WyrazenieZesp *wskWyrazenie ){
+  if (wskBazaTestu->IndeksPytania >= wskBazaTestu->IloscPytan) 
+    return false;
 
   *wskWyrazenie = wskBazaTestu->wskTabTestu[wskBazaTestu->IndeksPytania];
   ++wskBazaTestu->IndeksPytania;

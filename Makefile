@@ -9,9 +9,6 @@ INCLUDE  := -Iinc/
 SRC      := $(wildcard src/*.cpp)
 OBJECTS  := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
-__start__: ${APP_DIR}/test_arytm_zesp
-	${APP_DIR}/test_arytm_zesp  latwy
-
 all: build $(APP_DIR)/$(TARGET)
 
 $(OBJ_DIR)/%.o: %.cpp
