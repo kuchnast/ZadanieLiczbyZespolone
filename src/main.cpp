@@ -18,9 +18,9 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  BazaTestu BazaT = {nullptr, 0, 0};
+  BazaTestu BazaT;
 
-  if(InicjalizujTest(&BazaT,argv[1]) == false) {  //inicjuj odpowiedni poziom trudności testu lub zwróć błąd
+  if(!InicjalizujTest(BazaT,argv[1])) {  //inicjuj odpowiedni poziom trudności testu lub zwróć błąd
     cerr << "   Inicjalizacja testu nie powiodla sie." << endl;
     return 1;
   }
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 
   InicjalizujOdp(Pkt);
 
-  while (PobierzNastpnePytanie(&BazaT,&WyrZ_PytanieTestowe)) {
+  while (PobierzNastpnePytanie(BazaT, WyrZ_PytanieTestowe)) {
     b_zapisu = 0;
     if(!Oblicz(WyrZ_PytanieTestowe, OdpWlasc)){
       cerr << "---Wystąpił błąd podczas wykonywania obliczeń wyrazenia. Przejście do kolejnego pytania---" << endl;

@@ -60,6 +60,9 @@ std::istream & operator >> (std::istream & strm, Operator & Op) {
     case '/':
       Op = Op_Dziel;
       break;
+    default:
+      strm.setstate(std::ios::failbit);
+      break;
   }
   return strm;
 }

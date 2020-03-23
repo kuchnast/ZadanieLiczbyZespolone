@@ -18,6 +18,7 @@ $(OBJ_DIR)/%.o: %.cpp
 $(APP_DIR)/$(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -o $(APP_DIR)/$(TARGET) $^ $(LDFLAGS)
+	@ln -s $(APP_DIR)/$(TARGET) $(TARGET)
 
 build:
 	@mkdir -p $(APP_DIR)
@@ -29,3 +30,4 @@ debug: all
 clean:
 	-@rm -rvf $(OBJ_DIR)/*
 	-@rm -rvf $(APP_DIR)/*
+	-@rm -vf $(TARGET)
