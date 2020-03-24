@@ -51,6 +51,16 @@ bool operator == (LZespolona  L1,  LZespolona  L2);
 bool operator != (LZespolona  L1,  LZespolona  L2);
 
 /*!
+ * Porownanie liczby zespolonej i rzeczywistej
+ */
+bool operator == (LZespolona  L,  double R);
+
+/*!
+ * Porownanie liczby zespolonej i rzeczywistej
+ */
+bool operator != (LZespolona  L,  double R);
+
+/*!
  * Modul z liczby zespolonej
  */
 double Modul(LZespolona L1);
@@ -59,11 +69,6 @@ double Modul(LZespolona L1);
  * Sprzezenie liczby zespolonej
  */
 LZespolona Sprzezenie(LZespolona L1);
-
-/*!
- * Wyswietla liczbe zespolona
- */
-void Wyswietl(LZespolona Skl);
 
 /*!
  * Tworzenie nowej liczby zespolonej z dwoch czesci rzeczywistych

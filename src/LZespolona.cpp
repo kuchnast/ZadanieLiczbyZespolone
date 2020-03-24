@@ -70,6 +70,8 @@ LZespolona  operator * (LZespolona  L1,  LZespolona  L2)
  */
 LZespolona  operator / (LZespolona  L1,  double R){
   LZespolona Iloraz;
+  if(R == 0)
+    throw "Próba dzielenia przez 0.";  //zwrocenie wyjatku
   
   Iloraz.re = L1.re / R;
   Iloraz.im = L1.im / R;
@@ -88,6 +90,9 @@ LZespolona  operator / (LZespolona  L1,  double R){
 LZespolona  operator / (LZespolona  L1,  LZespolona  L2){
   LZespolona Iloraz;
 
+  if(L2 == 0)
+    throw "Próba dzielenia przez 0.";  //zwrocenie wyjatku
+    
   Iloraz = (L1 * Sprzezenie(L2)) / pow(Modul(L2), 2);
   return Iloraz;
 }
@@ -116,10 +121,34 @@ bool  operator == (LZespolona  L1,  LZespolona  L2){
  *    true jezeli sa rozne, false jesli liczby sa rowne.
  */
 bool  operator != (LZespolona  L1,  LZespolona  L2){
-  if(L1.re != L2.re || L1.im != L2.im){
+  return !(L1==L2);
+}
+
+/*!
+ * Realizuje porównanie liczby zespolonej i rzeczywistej
+ * Argumenty:
+ *    L1 - pierwsza liczba - zespolona,
+ *    R - druga liczba - rzeczywista.
+ * Zwraca:
+ *    true jezeli sa rowne, false jesli liczby sa rozne.
+ */
+bool  operator == (LZespolona L, double R){
+  if(L.re == R && L.im == 0){
     return true;
   }
   return false;
+}
+
+/*!
+ * Realizuje porównanie liczby zespolonej i rzeczywistej
+ * Argumenty:
+ *    L1 - pierwsza liczba - zespolona,
+ *    R - druga liczba - rzeczywista.
+ * Zwraca:
+ *    true jezeli sa rozne, false jesli liczby sa rowne.
+ */
+bool  operator != (LZespolona L, double R){
+  return !(L==R);
 }
 
 /*!

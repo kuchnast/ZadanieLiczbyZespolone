@@ -15,7 +15,9 @@ using std::endl;
  * Zwraca:
  *    true jezeli prawidlowo obliczono, jesli nie - false
  */
-bool Oblicz(WyrazenieZesp  WyrZ, LZespolona & Obl){
+LZespolona Oblicz(WyrazenieZesp  WyrZ){
+  LZespolona Obl;
+
   switch(WyrZ.Op){
     case Op_Dodaj:
         Obl = WyrZ.Arg1 + WyrZ.Arg2;
@@ -27,12 +29,11 @@ bool Oblicz(WyrazenieZesp  WyrZ, LZespolona & Obl){
         Obl = WyrZ.Arg1 * WyrZ.Arg2;
         break;
     case Op_Dziel:
-        if(WyrZ.Arg2.im == 0 && WyrZ.Arg2.re == 0)  //proba dzielenia przez 0
-          return false;
         Obl = WyrZ.Arg1 / WyrZ.Arg2;
         break;
   }
-  return true;
+
+  return Obl;
 }
 
 /*!

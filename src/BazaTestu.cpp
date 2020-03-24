@@ -2,11 +2,13 @@
 #include <fstream>
 #include <string.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #include "BazaTestu.hh"
 
 using std::cerr;
 using std::endl;
+using std::string;
 
 /*!
  * W bazie testu ustawia wybrany test jako biezacy test i indeks pytania
@@ -19,16 +21,28 @@ using std::endl;
  *    true - gdy operacja otwarcia pliku sie powiedzie
  *    false - w przeciwnym razie
  */
-bool UstawTest( BazaTestu &bazaT, const char *sNazwaPliku){
+bool UstawTest( BazaTestu &bazaT, const char * sNazwaPliku){
+  ssize_t dl;
+  char buf[1024];
+  string sciezka;
+
+  dl = readlink("/proc/self/exe", buf, sizeof(buf) - 1);  //odczytanie sciezki wykonywanego programu
+  if(dl == -1)                                            //w przypadku gdy nie odczytano sciezki, zwroc blad
+    return false;
+  buf[dl] = '\0';                                         //dodanie /0 zaraz po ostatnim wczytanym znaku
+  sciezka = buf;                                          //konwersja na typ string
+  sciezka = sciezka.substr(0, sciezka.find_last_of('/')); //znalezienie ostatniego wystapienia '/' po ktorym jest nazwa pliku, a nastepnie odciecie nazwy od sciezki
+  sciezka += "/../../bazaPytan/";                         //dodanie wzglednej sciezki do katalogu bazy pytan
+  sciezka += sNazwaPliku;                                 //dodanie nazwy pozadanego pliku z testem
+
   bazaT.nrLini = 0;
-  bazaT.plik.open(sNazwaPliku, std::ifstream::in);
+  bazaT.plik.open(sciezka, std::ifstream::in);
   if(!bazaT.plik.is_open()){
-    cerr << "Błąd otwarcia pliku z bazą pytań. Błędna ścieżka: " << sNazwaPliku << endl;
+    cerr << "Błąd otwarcia pliku z bazą pytań. Błędna ścieżka: " << sciezka << endl;
     return false;
   }
   return true;
 }
-
 
 /*!
  * Inicjalizuje test kojarzac otrzymana nazwe z jedna ze znanych lokalizacji pliku
@@ -43,11 +57,11 @@ bool UstawTest( BazaTestu &bazaT, const char *sNazwaPliku){
  */
 bool InicjalizujTest(BazaTestu  &bazaT, const char *sNazwaTestu){
   if(!strcmp(sNazwaTestu,"latwy")){
-    return UstawTest(bazaT, "bazaPytan/latwy.dat");
+    return UstawTest(bazaT, "latwy.dat");
   }
   
   if(!strcmp(sNazwaTestu,"trudny")){
-    return UstawTest(bazaT, "bazaPytan/trudny.dat");
+    return UstawTest(bazaT, "trudny.dat");
   }
 
   cerr << "Nieznana nazwa testu '" << sNazwaTestu << "'." << endl;

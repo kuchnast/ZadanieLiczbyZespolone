@@ -38,8 +38,12 @@ int main(int argc, char **argv)
 
   while (PobierzNastpnePytanie(BazaT, WyrZ_PytanieTestowe)) {
     b_zapisu = 0;
-    if(!Oblicz(WyrZ_PytanieTestowe, OdpWlasc)){
-      cerr << "---Wystąpił błąd podczas wykonywania obliczeń wyrazenia. Przejście do kolejnego pytania---" << endl;
+    
+    try{
+      OdpWlasc = Oblicz(WyrZ_PytanieTestowe);
+    }
+    catch(const char * k){  //obsluga wyjatku generowanego przez dzielenie przez 0
+      cerr << k << " Przejście do kolejnego pytania" << endl;
       continue;
     }
 
@@ -56,7 +60,7 @@ int main(int argc, char **argv)
       cin >> OdpUzyt;
     }
 
-    if(b_zapisu == 3){
+    if(b_zapisu == 3){  //po trzecim bledzie zapisu przejdz do kolejnego pytania
       cin.clear();
       cin.ignore(1000,'\n');
       cout << ":( Trzeci błąd zapisu liczby zespolonej. Przejście do kolejnego pytania." << endl;
@@ -71,7 +75,6 @@ int main(int argc, char **argv)
       DobraOdp(Pkt);
     }
   }
-
   
   cout << endl;
   cout << " Koniec testu" << endl;

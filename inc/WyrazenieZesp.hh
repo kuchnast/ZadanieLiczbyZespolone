@@ -23,7 +23,7 @@ struct WyrazenieZesp {
 /*!
  * Oblicza przesłane wyrazenie zespolone
  */
-bool Oblicz(WyrazenieZesp  WyrZ, LZespolona & Obl);
+LZespolona Oblicz(WyrazenieZesp  WyrZ);
 
 /*!
  * Wczytuje operator arytmetyczny ze strumienia wejsciowego

@@ -1,5 +1,5 @@
 CXX      := g++
-CXXFLAGS := -Wall -pedantic -std=c++14 -iquote inc
+CXXFLAGS := -Wall -pedantic -std=c++14
 LDFLAGS  := -L/usr/lib -lstdc++ -lm
 BUILD    := ./build
 OBJ_DIR  := $(BUILD)/objects
@@ -18,7 +18,7 @@ $(OBJ_DIR)/%.o: %.cpp
 $(APP_DIR)/$(TARGET): $(OBJECTS)
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) -o $(APP_DIR)/$(TARGET) $^ $(LDFLAGS)
-	@ln -s $(APP_DIR)/$(TARGET) $(TARGET)
+	@ln -svf $(APP_DIR)/$(TARGET) $(TARGET)
 
 build:
 	@mkdir -p $(APP_DIR)
